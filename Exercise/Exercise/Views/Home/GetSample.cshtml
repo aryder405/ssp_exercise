@@ -1,0 +1,60 @@
+﻿@model SampleModel
+
+
+<div>
+    <h2>Parsed Result:</h2>
+    <ul>
+        <li>
+            <label asp-for="@Model.Description"></label>: @Model.Description
+        </li>
+        <li>
+            @Html.LabelFor(m => m.FeatureData)
+            @{if (Model.FeatureData.Any())
+                {
+                    foreach (var feature in Model.FeatureData)
+                    {
+                        <div style="border-style: inset">
+                            <ul>
+                                <li>
+                                    <label asp-for="@feature.ID"></label>: @feature.ID
+                                </li>
+                                <li>
+                                    <label asp-for="@feature.Type"></label>: @feature.Type
+                                </li>
+                                <li>
+                                    <label asp-for="@feature.Properties"></label>
+                                    <ul>
+                                        <li>
+                                            <label asp-for="@feature.Properties.City"></label>: @feature.Properties.City
+                                        </li>
+                                        <li>
+                                            <label asp-for="@feature.Properties.Wikipedia"></label>: @feature.Properties.Wikipedia
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <label asp-for="@feature.Geometry"></label>
+                                    <ul>
+                                        <li>
+                                            <label asp-for="@feature.Geometry.Type"></label>: @feature.Geometry.Type
+                                        </li>
+                                        <li>
+                                            <label asp-for="@feature.Geometry.Coordinates"></label>:
+                                            <ul>
+                                                @foreach (var coord in feature.Geometry.Coordinates)
+                                                {
+                                                    <li>
+                                                        @coord
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                }}
+        </li>
+    </ul>
+</div>
